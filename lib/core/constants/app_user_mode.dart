@@ -1,0 +1,1 @@
+enum AppUserMode { diet, diabetic }
