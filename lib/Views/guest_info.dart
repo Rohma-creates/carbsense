@@ -238,7 +238,6 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                       ),
                       SizedBox(height: 20),
                       Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: _buildCard(context, 'IC Ratio', icRatio),
