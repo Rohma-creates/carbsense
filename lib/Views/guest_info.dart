@@ -58,13 +58,13 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
     return (weightKg / (h * h)).toStringAsFixed(1);
   }
 
-  String get isf {
+  /* String get isf {
     // Access the text directly to ensure tdd is updated
     final tddVal = double.tryParse(controllerTDD.text);
     if (tddVal == null || tddVal == 0) return '—';
 
     return (1800 / tddVal).toStringAsFixed(2);
-  }
+  }*/
 
   // ── Stat card widget ─────────────────────────────────────────────────
 
@@ -268,7 +268,7 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                           SizedBox(width: 10),
                           Expanded(child: _buildCard(context, 'BMI', bmi)),
                           SizedBox(width: 10),
-                          Expanded(child: _buildCard(context, 'ISF', isf)),
+                          //   Expanded(child: _buildCard(context, 'ISF', isf)),
                         ],
                       ),
                       SizedBox(height: 50),
