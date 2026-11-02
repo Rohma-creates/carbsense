@@ -303,7 +303,9 @@ class _GuestInfoDietState extends State<GuestInfoDiet> {
                       controller: controllerHeight,
                       label: 'Height (cm)',
                       hint: 'e.g. 170',
-                      keyBoardType: TextInputType.number,
+                      keyBoardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       prefixIcon: Icons.height,
 
                       validator: (value) {
@@ -326,7 +328,9 @@ class _GuestInfoDietState extends State<GuestInfoDiet> {
                       controller: controllerWeight,
                       label: 'Weight (kg)',
                       hint: 'e.g. 70',
-                      keyBoardType: TextInputType.number,
+                      keyBoardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       prefixIcon: FontAwesomeIcons.scaleBalanced,
 
                       validator: (value) {
@@ -349,7 +353,9 @@ class _GuestInfoDietState extends State<GuestInfoDiet> {
                       controller: controllerAge,
                       label: 'Age',
                       hint: 'e.g. 28',
-                      keyBoardType: TextInputType.number,
+                      keyBoardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       prefixIcon: FontAwesomeIcons.calendarDays,
 
                       validator: (value) {

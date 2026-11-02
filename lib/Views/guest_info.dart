@@ -171,13 +171,15 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                       SizedBox(height: 10),
                       CarbsenseTextbox(
                         controller: controllerHeight,
-                        label: 'Height (cm)',
+                        label: 'Height (cm,optional)',
                         hint: 'e.g. 170',
-                        keyBoardType: TextInputType.number,
+                        keyBoardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         prefixIcon: Icons.height,
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'This field cannot be left empty';
+                            return null;
                           }
 
                           final parsedNum = double.tryParse(value);
@@ -195,7 +197,9 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                         controller: controllerWeight,
                         label: 'Weight (kg)',
                         hint: 'e.g. 70',
-                        keyBoardType: TextInputType.number,
+                        keyBoardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         prefixIcon: FontAwesomeIcons.scaleBalanced,
 
                         validator: (value) {
@@ -223,7 +227,9 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                         controller: controllerTDD,
                         label: 'Total Daily Dose (TDD)',
                         hint: 'e.g. 42',
-                        keyBoardType: TextInputType.number,
+                        keyBoardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         prefixIcon: FontAwesomeIcons.syringe,
                         validator: (value) {
                           // 1. If it's completely empty, pass without error (it's skipped)
@@ -241,6 +247,10 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                           // 3. If they specifically typed 0 or a negative number
                           if (parsed <= 0) {
                             return 'TDD must be greater than 0';
+                          }
+
+                          if (parsed < 5 || parsed > 200) {
+                            return 'TDD is usually 5–200 units. Please check it.';
                           }
 
                           return null; // All checks passed!
@@ -275,8 +285,43 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                       CustomButton(
                         text: 'Find my Food  →',
                         gradient: AppColors.buttonGradient,
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            final tddValue = double.tryParse(
+                              controllerTDD.text,
+                            );
+                            final weightValue =
+                                double.tryParse(controllerWeight.text) ?? 0;
+                            if (tddValue != null && weightValue > 0) {
+                              final perKg = tddValue / weightValue;
+                              if (perKg < 0.2 || perKg > 1.5) {
+                                final ok = await showDialog<bool>(
+                                  context: context,
+                                  builder:
+                                      (ctx) => AlertDialog(
+                                        title: const Text(
+                                          'Please check your TDD',
+                                        ),
+                                        content: Text(
+                                          'A TDD of ${controllerTDD.text} units looks unusual for a weight of ${controllerWeight.text} kg. Is it correct?',
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(ctx, false),
+                                            child: const Text('Check again'),
+                                          ),
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(ctx, true),
+                                            child: const Text("It's correct"),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                                if (ok != true || !context.mounted) return;
+                              }
+                            }
                             FocusScope.of(context).unfocus();
                             Navigator.pushNamed(
                               context,

@@ -185,12 +185,12 @@ class FoodDetailScreen extends StatelessWidget {
         value: item.carbohydrates.isNotEmpty ? item.carbohydrates : '—',
         color: const Color(0xFF6C63FF),
       ),
-      _InfoTile(
+      /*  _InfoTile(
         icon: Icons.vaccines_outlined,
         label: 'Insulin',
         value: item.insulin.isNotEmpty ? item.insulin : '—',
         color: const Color(0xFFFF6584),
-      ),
+      ),*/
     ];
 
     return Column(

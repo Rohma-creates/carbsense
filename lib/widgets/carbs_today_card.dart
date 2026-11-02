@@ -42,7 +42,15 @@ Future<void> showSetTargetDialog(BuildContext context) async {
             TextButton(
               onPressed: () {
                 final v = double.tryParse(controller.text.trim());
-                if (v != null && v > 0) log.setTarget(v);
+                if (v == null || v <= 0) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Enter a number greater than 0'),
+                    ),
+                  );
+                  return;
+                }
+                log.setTarget(v);
                 Navigator.pop(ctx);
               },
               child: const Text('Save'),

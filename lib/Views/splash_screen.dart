@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
     _ctrl.forward().then((_) async {
       await Future.delayed(const Duration(seconds: 1));
       if (!mounted) return;
-      Navigator.pushNamed(context, RouteNames.welcomeView);
+      Navigator.pushReplacementNamed(context, RouteNames.welcomeView);
     });
   }
 

@@ -24,13 +24,13 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
   int serving = 1;
 
   // "12.5 gm" -> 13 (rounded to whole grams)
-  int get _carbsPerServing => widget.item.carbsPerServing.round();
+  double get _carbsPerServing => widget.item.carbsPerServing;
 
-  int get _totalCarbs => _carbsPerServing * serving;
+  double get _totalCarbs => _carbsPerServing * serving;
 
   // IC Ratio is used exactly as calculated (e.g. 16.67), no rounding.
   double get _rawDose => widget.icRatio <= 0 ? 0 : _totalCarbs / widget.icRatio;
-  int get _doseUnits => _rawDose.round();
+  // int get _doseUnits => _rawDose.round();
   String get _icText => widget.icRatio.toStringAsFixed(1);
 
   _DoseCase get _doseCase {
@@ -208,7 +208,7 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
                                           ),
                                           const SizedBox(height: 3),
                                           Text(
-                                            '$serving serving${serving > 1 ? 's' : ''} · ${_totalCarbs}g carbs',
+                                            '$serving serving${serving > 1 ? 's' : ''} · ${_fmt(_totalCarbs)}g carbs',
                                             style: AppTextStyles.caption(
                                               context,
                                             ).copyWith(
@@ -245,7 +245,10 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
                                   ],
                                 ),
                                 const Divider(height: 20),
-                                _infoRow('Total Carbs', '${_totalCarbs}g'),
+                                _infoRow(
+                                  'Total Carbs',
+                                  '${_fmt(_totalCarbs)}g',
+                                ),
                                 const SizedBox(height: 6),
                                 _infoRow('Your IC Ratio', _icText),
                               ],
@@ -382,7 +385,7 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
           numColor: const Color(0xFF92400E),
           unitText: 'unit by this estimate',
           formula:
-              '${_totalCarbs}g ÷ IC Ratio $_icText = ${_rawDose.toStringAsFixed(2)}',
+              '${_fmt(_totalCarbs)}g ÷ IC Ratio $_icText = ${_rawDose.toStringAsFixed(2)}',
           message: 'Ask your doctor whether you need insulin for this amount.',
         );
 
@@ -391,12 +394,13 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
           bg: const Color(0xFFEFF6FF),
           border: const Color(0xFFBFDBFE),
           labelColor: const Color(0xFF3B82F6),
-          numText: '$_doseUnits',
+          numText: _rawDose.toStringAsFixed(1),
           numColor: const Color(0xFF1D4ED8),
-          unitText: 'unit${_doseUnits != 1 ? 's' : ''} of insulin',
+          unitText: 'units of insulin (approx.)',
           formula:
-              '${_totalCarbs}g ÷ IC Ratio $_icText = ${_rawDose.toStringAsFixed(2)} → $_doseUnits unit${_doseUnits != 1 ? 's' : ''}',
-          message: '',
+              '${_fmt(_totalCarbs)}g ÷ IC Ratio $_icText = ${_rawDose.toStringAsFixed(2)}',
+          message:
+              'Round this to what your pen allows, as your doctor advised.',
         );
     }
   }

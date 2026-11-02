@@ -5,7 +5,7 @@ class FoodItem {
   final String servingSize;
   final String carbohydrates;
   final String imageUrl;
-  final String insulin;
+  //  final String insulin;
 
   const FoodItem({
     required this.category,
@@ -14,7 +14,7 @@ class FoodItem {
     required this.servingSize,
     required this.carbohydrates,
     required this.imageUrl,
-    required this.insulin,
+    // required this.insulin,
   });
 
   /// Carbs per serving as a number: "12.5 gm" -> 12.5, "15gm" -> 15.
@@ -32,7 +32,7 @@ class FoodItem {
       servingSize: row['ServingSize']?.toString().trim() ?? '',
       carbohydrates: row['Carbohydrates']?.toString().trim() ?? '',
       imageUrl: row['Image']?.toString().trim() ?? '',
-      insulin: row['Insulin']?.toString().trim() ?? '',
+      //    insulin: row['Insulin']?.toString().trim() ?? '',
     );
   }
 }
