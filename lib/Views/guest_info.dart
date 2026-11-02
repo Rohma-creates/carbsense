@@ -68,26 +68,6 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
 
   // ── Stat card widget ─────────────────────────────────────────────────
 
-  /* Widget _buildCard(BuildContext context, String title, String value) {
-    return Container(
-      width: 100,
-      height: 80,
-      decoration: BoxDecoration(
-        color: AppColors.diabeticSurface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.diabeticBorder, width: 0.5),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(title, style: AppTextStyles.buttonGhost(context)),
-          SizedBox(height: 6),
-          Text(value, style: AppTextStyles.chipDiabetic(context)),
-        ],
-      ),
-    );
-  }*/
-
   Widget _buildCard(BuildContext context, String title, String value) {
     return Container(
       constraints: const BoxConstraints(
@@ -129,19 +109,7 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
             title: 'Quick Setup',
             showBack: true,
             subtitle: 'Enter your details to calculate your dose',
-            /*   modeWidget: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.25),
-                  width: 0.5,
-                ),
-              ),
-              child: Icon(FontAwesomeIcons.droplet, color: Colors.white),
-            ),*/
+
             mode: AppUserMode.diabetic,
           ),
           SizedBox(height: 20),
@@ -171,7 +139,7 @@ class _GuestInfoScreenState extends State<GuestInfoScreen> {
                       SizedBox(height: 10),
                       CarbsenseTextbox(
                         controller: controllerHeight,
-                        label: 'Height (cm,optional)',
+                        label: 'Height (cm, optional)',
                         hint: 'e.g. 170',
                         keyBoardType: const TextInputType.numberWithOptions(
                           decimal: true,
