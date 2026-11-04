@@ -37,9 +37,9 @@ class CarbsenseCard extends StatelessWidget {
       // whole card. Now tapping anywhere on the card triggers onTap.
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        width: width ?? 250,
-        height: height ?? 110,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        width: width ?? 300,
+        constraints: BoxConstraints(minHeight: height ?? 110),
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(12),
@@ -58,7 +58,6 @@ class CarbsenseCard extends StatelessWidget {
               style: AppTextStyles.cardSubtitle(
                 context,
               ), // ← was body, now cardSubtitle
-              maxLines: 2,
             ),
             trailing:
                 trailing, // no extra GestureDetector needed — card handles it

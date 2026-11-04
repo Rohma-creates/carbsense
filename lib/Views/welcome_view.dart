@@ -52,7 +52,7 @@ class WelcomeView extends StatelessWidget {
                   CarbsenseCard(
                     title: 'For Diabetics',
                     subtitle:
-                        'Track blood sugar & carbs\nintake with precision.',
+                        'See carbs and estimate your meal dose.',
                     icon: FontAwesomeIcons.droplet,
                     iconGradient: AppColors.buttonGradient,
                     backgroundColor: AppColors.diabeticSurface,
@@ -67,7 +67,7 @@ class WelcomeView extends StatelessWidget {
                   SizedBox(height: 10),
                   CarbsenseCard(
                     title: 'For Diet & Nutrition',
-                    subtitle: 'Log meals and hit your daily calorie goals.',
+                    subtitle: 'Check carbs and track what you eat.',
                     icon: FontAwesomeIcons.leaf,
                     iconGradient: AppColors.dietGradient,
                     backgroundColor: AppColors.dietSurface,

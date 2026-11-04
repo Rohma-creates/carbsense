@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                 // Tagline
                 Text(
-                  'EAT SMART. LIVE WELL.',
+                  'EAT SMART. LIVE SMART.',
                   style: TextStyle(
                     fontSize: 11,
                     color: Color(0xFFB0B7C3),
