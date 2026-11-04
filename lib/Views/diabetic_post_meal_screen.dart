@@ -23,7 +23,7 @@ class DiabeticPostMealScreen extends StatefulWidget {
 class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
   int serving = 1;
 
-  // "12.5 gm" -> 13 (rounded to whole grams)
+  // exact carbs, no rounding.
   double get _carbsPerServing => widget.item.carbsPerServing;
 
   double get _totalCarbs => _carbsPerServing * serving;
@@ -77,6 +77,7 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
                             Container(color: AppColors.diabeticBorder),
                             Image.network(
                               widget.item.imageUrl,
+                              cacheWidth: 800,
                               height: 220,
                               width: double.infinity,
                               fit: BoxFit.cover,
@@ -149,25 +150,28 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
                             ).copyWith(color: Colors.black, letterSpacing: 1.5),
                           ),
                           const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _infoChip(
-                                  icon: FontAwesomeIcons.jarWheat,
-                                  value:
-                                      '${_fmt(widget.item.carbsPerServing)} g',
-                                  label: 'CARBS / SERVING',
+                          IntrinsicHeight(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: _infoChip(
+                                    icon: FontAwesomeIcons.jarWheat,
+                                    value:
+                                        '${_fmt(widget.item.carbsPerServing)} g',
+                                    label: 'CARBS / SERVING',
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: _infoChip(
-                                  icon: FontAwesomeIcons.bowlRice,
-                                  value: widget.item.servingSize,
-                                  label: 'SERVING SIZE',
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: _infoChip(
+                                    icon: FontAwesomeIcons.bowlRice,
+                                    value: widget.item.servingSize,
+                                    label: 'SERVING SIZE',
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 20),
 
@@ -495,8 +499,8 @@ class _DiabeticPostMealScreenState extends State<DiabeticPostMealScreen> {
                 Text(
                   value,
                   style: AppTextStyles.chipDiabetic(context),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  //      maxLines: 2,
+                  //      overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(

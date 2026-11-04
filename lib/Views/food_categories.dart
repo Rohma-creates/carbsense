@@ -416,6 +416,7 @@ class _NetworkFoodImage extends StatelessWidget {
     }
     return Image.network(
       imageUrl,
+      cacheWidth: 200,
       width: size,
       height: size,
       fit: BoxFit.cover,

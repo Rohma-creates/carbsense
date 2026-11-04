@@ -50,7 +50,17 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // pure white background
+      backgroundColor: Colors.white,
+      bottomNavigationBar: const SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 16),
+          child: Text(
+            '© 2026 Rohma Saeed. All rights reserved.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11, color: Color(0xFFB0B7C3)),
+          ),
+        ),
+      ),
       body: Center(
         child: FadeTransition(
           opacity: _fade,

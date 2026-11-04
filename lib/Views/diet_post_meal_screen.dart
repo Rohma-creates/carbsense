@@ -122,24 +122,27 @@ class _DietPostMealScreenState extends State<DietPostMealScreen> {
                   ),
                   const SizedBox(height: 10),
 
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _infoChip(
-                          icon: FontAwesomeIcons.jarWheat,
-                          value: '${_fmt(_carbsPerServing)} g',
-                          label: 'CARBS / SERVING',
+                  IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: _infoChip(
+                            icon: FontAwesomeIcons.jarWheat,
+                            value: '${_fmt(_carbsPerServing)} g',
+                            label: 'CARBS / SERVING',
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: _infoChip(
-                          icon: FontAwesomeIcons.bowlRice,
-                          value: widget.item.servingSize,
-                          label: 'SERVING SIZE',
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: _infoChip(
+                            icon: FontAwesomeIcons.bowlRice,
+                            value: widget.item.servingSize,
+                            label: 'SERVING SIZE',
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 12),
 
@@ -231,6 +234,7 @@ class _DietPostMealScreenState extends State<DietPostMealScreen> {
               if (url.isNotEmpty)
                 Image.network(
                   url,
+                  cacheWidth: 800,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
@@ -442,8 +446,8 @@ class _DietPostMealScreenState extends State<DietPostMealScreen> {
                 Text(
                   value,
                   style: AppTextStyles.chipDiet(context),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  //     maxLines: 1,
+                  //     overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(
